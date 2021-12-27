@@ -1,24 +1,24 @@
 {
-  "persons":[
-    { 
-      "name": "Arto Hellas", 
-      "number": "040-123456",
-      "id": 1
-    },
-    { 
-      "name": "Ada Lovelace", 
-      "number": "39-44-5323523",
+  "persons": [
+    {
+      "name": "testi henkilö2",
+      "number": "0502200",
       "id": 2
     },
-    { 
-      "name": "Dan Abramov", 
-      "number": "12-43-234345",
+    {
+      "name": "testi henkilö3",
+      "number": "05033000",
       "id": 3
     },
-    { 
-      "name": "Mary Poppendieck", 
-      "number": "39-23-6423122",
+    {
+      "name": "testi henkilö4",
+      "number": "0504400",
       "id": 4
+    },
+    {
+      "name": "a",
+      "number": "1",
+      "id": 5
     }
   ]
 }
