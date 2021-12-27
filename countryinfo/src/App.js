@@ -35,8 +35,53 @@ const MoreThanOneLessThanElevenCountries = (props) => {
   )
 }
 
+const ListWeatherInfo = (props) => {
+  return (
+    <div>
+      <div><b>Temperature:</b> {props.temperature} Celcius</div>
+      <div><img src={props.imageurl}/></div>
+      <div><b>Wind:</b> {props.wind_speed} (Direction: {props.wind_dir})</div>
+    </div>
+  )
+}
+
+const WeatherInfo = (props) => {
+  const capital = props.capital
+  //const access_key = process.env.REACT_APP_API_KEY
+
+  const params = {
+    access_key: process.env.REACT_APP_API_KEY,
+    query: {capital}
+  }
+
+  const [responseData, setResponseData] = useState([])
+
+  const WeatherHook = () => {
+    axios
+    .get(`http://api.weatherstack.com/current`, {params})
+    .then(response => {
+      console.log(response.data)
+      setResponseData(response.data)
+    })
+  }
+  useEffect(WeatherHook, [])
+  
+  /*
+      <div><b>Temperature:</b> {responseData.current.temperature} Celcius</div>
+      <div><img src={responseData.current.weather_icons[0]} /></div>
+      <div><b>Wind:</b> {responseData.current.wind_speed} (Direction: {responseData.current.wind_dir})</div>
+  */
+  return (
+    <div>
+      <h2>Weather in {capital}:</h2>
+      <ListWeatherInfo temperature={responseData.current.temperature} imageurl={responseData.current.weather_icons[0]} wind_speed={responseData.current.wind_speed} wind_dir={responseData.current.wind_dir}/>
+    </div>
+  )
+}
+
 const OneCountry = (props) => {
   const country = props.countries[0]
+  //<WeatherInfo country={country} capital={country.capital[0]}/>
   return (
     <div>
       <h1>{country.name.common}</h1>
@@ -82,11 +127,11 @@ const App = () => {
       .get(`https://restcountries.com/v3.1/all`)
       .then(response => {
         setCountries(response.data)
-        console.log(response.data)
+        //console.log(response.data)
       })
   }
   useEffect(Hook, [])
-
+  
   const listFilteredCountries = (part) => {
     const filteredCountries = []
     countries.map(country => {
